@@ -82,11 +82,13 @@
 
   # Windowing Systems
   services.xserver.enable = true;
+
   services.displayManager.sddm = {
     enable = true;
     theme = "catppuccin-mocha";
     package = pkgs.kdePackages.sddm;
   };
+
   programs.hyprland.enable = true;
   security.polkit.enable = true;
 
