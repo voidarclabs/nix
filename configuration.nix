@@ -2,18 +2,19 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+    [
+      /etc/nixos/hardware-configuration.nix
     ];
+
   # Allow Nix command and flakes (ofc)
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
 # Allow unfree packages
-  nixpkgs = { 
+  nixpkgs = {
 	  config = {
 		  allowUnfree = true;
 		  packageOverrides = pkgs: {
-			  unstable = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz") {}; 
+			  unstable = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz") {};
 		  };
 	  };
   };
@@ -50,15 +51,15 @@
   networking.hostName = "mobile02"; # Define your hostname.
   networking.networkmanager.enable = true;
 
-  # Enable bluetooth 
+  # Enable bluetooth
   hardware.bluetooth.enable = true;
 
   # Opengl and vulkan
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
-      vaapiIntel
-      vaapiVdpau
+      intel-vaapi-driver
+      libva-vdpau-driver
     ];
   };
 
@@ -216,6 +217,7 @@
 	    pkgs.vscode-langservers-extracted
 	    pkgs.emmet-ls
 	    pkgs.ripgrep
+        pkgs.nil
             pkgs.typescript-language-server
             pkgs.tailwindcss-language-server
 	    pkgs.stylua
