@@ -6,7 +6,8 @@
   };
 
   outputs = { self, nixpkgs }: let
-    system = "x86_64-linux";  # adjust if needed
+    stdenv.hostPlatform.system = "x86_64-linux";  # adjust if needed
+    system = stdenv.hostPlatform.system;
     hardwareConfig = import /etc/nixos/hardware-configuration.nix;
   in
   {
