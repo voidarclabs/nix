@@ -1,9 +1,10 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 {
   imports =
     [
       /etc/nixos/hardware-configuration.nix
+      inputs.walker.nixosModules.default
     ];
 
   # Allow Nix command and flakes (ofc)
@@ -114,7 +115,7 @@
     isNormalUser = true;
    shell = pkgs.zsh;
     description = "user01";
-    extraGroups = [ "input" "networkmanager" "docker" "wheel" ];
+    extraGroups = [ "input" "bluetooth" "networkmanager" "docker" "wheel" ];
     packages = with pkgs; [
         # Ricing
         bibata-cursors
@@ -122,8 +123,8 @@
 	(builtins.getFlake "/etc/nixos/way-edges").packages.${pkgs.system}.default
 	waybar
 	swaynotificationcenter
-	fuzzel
         wpaperd
+        kando
         oh-my-posh
 
         # Terminal
@@ -131,9 +132,9 @@
         kitty
         github-cli
         light
-	bluetuith
+	    bluetuith
         wget
-	playerctl
+	    playerctl
         git
         fastfetch
         lsd
@@ -184,6 +185,7 @@
 
 # User programs
   programs.steam.enable = true;
+  programs.walker.enable = true;
 
 # User Services
   services.gvfs.enable = true;
@@ -191,6 +193,7 @@
   services.printing.enable = true;
   services.upower.enable = true;
   services.openssh.enable = true;
+  services.elephant.enable = true;
 
   # Fonts
   fonts.packages = with pkgs; [
