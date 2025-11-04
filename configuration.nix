@@ -122,7 +122,9 @@
         catppuccin-gtk
 	(builtins.getFlake "/etc/nixos/way-edges").packages.${pkgs.system}.default
 	waybar
+    hyprlock
 	swaynotificationcenter
+    wlogout
         wpaperd
         kando
         oh-my-posh
