@@ -124,6 +124,7 @@
 	waybar
     hyprlock
 	swaynotificationcenter
+    inputs.chataigne.packages.${pkgs.system}.chataigne
     wlogout
         wpaperd
         kando

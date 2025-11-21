@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     elephant.url = "github:abenz1267/elephant";
+    chataigne.url = "./chataigne";
 
     walker = {
         url = "github:abenz1267/walker";
@@ -11,7 +12,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: let
+  outputs = { self, chataigne, nixpkgs, ... }@inputs: let
     stdenv.hostPlatform.system = "x86_64-linux";  # adjust if needed
     system = stdenv.hostPlatform.system;
     hardwareConfig = import /etc/nixos/hardware-configuration.nix;
@@ -24,6 +25,9 @@
       modules = [
         ./configuration.nix
         hardwareConfig
+        {
+          nixpkgs.config.allowUnfree = true;
+        }
       ];
     };
   };

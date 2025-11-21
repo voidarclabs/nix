@@ -1,8 +1,23 @@
 {
   "nodes": {
-    "elephant": {
+    "chataigne": {
       "inputs": {
         "nixpkgs": "nixpkgs",
+        "pinned-nixpkgs": "pinned-nixpkgs"
+      },
+      "locked": {
+        "path": "./chataigne",
+        "type": "path"
+      },
+      "original": {
+        "path": "./chataigne",
+        "type": "path"
+      },
+      "parent": []
+    },
+    "elephant": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_2",
         "systems": "systems"
       },
       "locked": {
@@ -21,6 +36,22 @@
     },
     "nixpkgs": {
       "locked": {
+        "lastModified": 1763421233,
+        "narHash": "sha256-Stk9ZYRkGrnnpyJ4eqt9eQtdFWRRIvMxpNRf4sIegnw=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "89c2b2330e733d6cdb5eae7b899326930c2c0648",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
         "lastModified": 1760284886,
         "narHash": "sha256-TK9Kr0BYBQ/1P5kAsnNQhmWWKgmZXwUQr4ZMjCzWf2c=",
         "owner": "NixOS",
@@ -35,7 +66,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_2": {
+    "nixpkgs_3": {
       "locked": {
         "lastModified": 1761907660,
         "narHash": "sha256-kJ8lIZsiPOmbkJypG+B5sReDXSD1KGu2VEPNqhRa/ew=",
@@ -51,7 +82,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
+    "nixpkgs_4": {
       "locked": {
         "lastModified": 1757068644,
         "narHash": "sha256-NOrUtIhTkIIumj1E/Rsv1J37Yi3xGStISEo8tZm3KW4=",
@@ -67,10 +98,28 @@
         "type": "github"
       }
     },
+    "pinned-nixpkgs": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1708756934,
+        "narHash": "sha256-WqpheJblJ901Svd5NmLJYLmZ3f4fYLkSOyx9i06+un0=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "5171d7b0a9fbaaf216c873622eb5115b6db97957",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "5171d7b0a9fbaaf216c873622eb5115b6db97957",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
+        "chataigne": "chataigne",
         "elephant": "elephant",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs_3",
         "walker": "walker"
       }
     },
@@ -109,7 +158,7 @@
         "elephant": [
           "elephant"
         ],
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": "nixpkgs_4",
         "systems": "systems_2"
       },
       "locked": {
