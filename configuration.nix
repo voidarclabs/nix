@@ -226,6 +226,7 @@
 	    pkgs.emmet-ls
 	    pkgs.ripgrep
         pkgs.nil
+        pkgs.nixd
             pkgs.typescript-language-server
             pkgs.tailwindcss-language-server
 	    pkgs.stylua
