@@ -5,6 +5,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     elephant.url = "github:abenz1267/elephant";
     chataigne.url = "./chataigne";
+		way-edges.url = "github:way-edges/way-edges";
 
     walker = {
         url = "github:abenz1267/walker";

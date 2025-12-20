@@ -98,6 +98,22 @@
         "type": "github"
       }
     },
+    "nixpkgs_5": {
+      "locked": {
+        "lastModified": 1761597516,
+        "narHash": "sha256-wxX7u6D2rpkJLWkZ2E932SIvDJW8+ON/0Yy8+a5vsDU=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "daf6dc47aa4b44791372d6139ab7b25269184d55",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-25.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "pinned-nixpkgs": {
       "flake": false,
       "locked": {
@@ -120,7 +136,29 @@
         "chataigne": "chataigne",
         "elephant": "elephant",
         "nixpkgs": "nixpkgs_3",
-        "walker": "walker"
+        "walker": "walker",
+        "way-edges": "way-edges"
+      }
+    },
+    "rust-overlay": {
+      "inputs": {
+        "nixpkgs": [
+          "way-edges",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1761878277,
+        "narHash": "sha256-6fCtyVdTzoQejwoextAu7dCLoy5fyD3WVh+Qm7t2Nhg=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "6604534e44090c917db714faa58d47861657690c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
       }
     },
     "systems": {
@@ -172,6 +210,25 @@
       "original": {
         "owner": "abenz1267",
         "repo": "walker",
+        "type": "github"
+      }
+    },
+    "way-edges": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_5",
+        "rust-overlay": "rust-overlay"
+      },
+      "locked": {
+        "lastModified": 1766153193,
+        "narHash": "sha256-E1kDfofMXNX5XjrJggSFDVid6/1ETmbp3qRXuuGd6zM=",
+        "owner": "way-edges",
+        "repo": "way-edges",
+        "rev": "03a9091642ad39345115223890000481eeac8333",
+        "type": "github"
+      },
+      "original": {
+        "owner": "way-edges",
+        "repo": "way-edges",
         "type": "github"
       }
     }
