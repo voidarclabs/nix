@@ -142,7 +142,7 @@
 				git
 				fastfetch
 				lsd
-				doot
+				stow
 				fzf
 				ripgrep
 				zsh-autocomplete

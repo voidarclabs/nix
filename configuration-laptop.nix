@@ -26,7 +26,7 @@
 		 fontSize = "11";
 		 background = null;
 		 })
-]
+];
 
 # Local User
 	users.users.user01 = {
