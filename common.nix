@@ -49,20 +49,20 @@
 	boot.kernelPackages = pkgs.linuxPackages_latest;
 
 # Networking settings
-	networking.hostName = "mobile02"; # Define your hostname.
-		networking.networkmanager.enable = true;
+	# networking.hostName = "mobile02"; # Define your hostname.
+	networking.networkmanager.enable = true;
 
 # Enable bluetooth
 	hardware.bluetooth.enable = true;
 
-# Opengl and vulkan
-	hardware.graphics = {
-		enable = true;
-		extraPackages = with pkgs; [
-			intel-vaapi-driver
-				libva-vdpau-driver
-		];
-	};
+# # Opengl and vulkan
+# 	hardware.graphics = {
+# 		enable = true;
+# 		extraPackages = with pkgs; [
+# 			intel-vaapi-driver
+# 				libva-vdpau-driver
+# 		];
+# 	};
 
 # Set your time zone.
 	time.timeZone = "Europe/London";
@@ -84,11 +84,11 @@
 # Windowing Systems
 	services.xserver.enable = true;
 
-	services.displayManager.sddm = {
-		enable = true;
-		theme = "catppuccin-mocha-mauve";
-		package = pkgs.kdePackages.sddm;
-	};
+# 	services.displayManager.sddm = {
+# 		enable = true;
+# 		theme = "catppuccin-mocha-mauve";
+# 		package = pkgs.kdePackages.sddm;
+# 	};
 
 	programs.hyprland.enable = true;
 	security.polkit.enable = true;
@@ -120,7 +120,7 @@
 # Ricing
 			bibata-cursors
 				catppuccin-gtk
-				inputs.way-edges.packages.${pkgs.system}.way-edges
+				# inputs.way-edges.packages.${pkgs.system}.way-edges
 				waybar
 				hyprlock
 				swaynotificationcenter
@@ -135,15 +135,14 @@
 				carapace
 				kitty
 				github-cli
-				light
+				# light
 				bluetuith
 				wget
 				playerctl
 				git
 				fastfetch
 				lsd
-				juce
-				stow
+				doot
 				fzf
 				ripgrep
 				zsh-autocomplete
@@ -208,12 +207,12 @@
 	environment.systemPackages = with pkgs; [
 
 # Catppuccin sddm theme
-		(pkgs.catppuccin-sddm.override {
-		 flavor = "mocha";
-		 font = "Fira Mono Nerd Font";
-		 fontSize = "11";
-		 background = null;
-		 })
+# 		(pkgs.catppuccin-sddm.override {
+# 		 flavor = "mocha";
+# 		 font = "Fira Mono Nerd Font";
+# 		 fontSize = "11";
+# 		 background = null;
+# 		 })
 # Terminal things
 	(pkgs.symlinkJoin {
 	 name = "nvim-with-lsp";
@@ -264,3 +263,4 @@
 	system.stateVersion = "25.05"; # Did you read the comment?
 
 }
+

@@ -1,5 +1,5 @@
 {
-  description = "Impure NixOS flake for mobile02";
+  description = "Impure NixOS flake";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -14,7 +14,7 @@
   };
 
   outputs = { self, chataigne, nixpkgs, ... }@inputs: let
-    stdenv.hostPlatform.system = "x86_64-linux";  # adjust if needed
+    stdenv.hostPlatform.system = "x86_64-linux";
     system = stdenv.hostPlatform.system;
     hardwareConfig = import /etc/nixos/hardware-configuration.nix;
   in
@@ -24,7 +24,21 @@
       specialArgs = {inherit inputs;};
 
       modules = [
-        ./configuration.nix
+        ./configuration-laptop.nix
+				./common.nix
+        hardwareConfig
+        {
+          nixpkgs.config.allowUnfree = true;
+        }
+      ];
+    };
+    nixosConfigurations.hackstation = nixpkgs.lib.nixosSystem {
+      inherit system;
+      specialArgs = {inherit inputs;};
+
+      modules = [
+        ./configuration-pc.nix
+				./common.nix
         hardwareConfig
         {
           nixpkgs.config.allowUnfree = true;
