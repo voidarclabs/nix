@@ -18,6 +18,7 @@
 		package = pkgs.kdePackages.sddm;
 	};
 
+	environment.systemPackages = with pkgs; [
 # Catppuccin sddm theme
 		(pkgs.catppuccin-sddm.override {
 		 flavor = "mocha";
@@ -25,6 +26,7 @@
 		 fontSize = "11";
 		 background = null;
 		 })
+]
 
 # Local User
 	users.users.user01 = {
