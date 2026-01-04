@@ -5,6 +5,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     elephant.url = "github:abenz1267/elephant";
     chataigne.url = "./chataigne";
+    doot.url = "github:voidarclabs/nixos.doot";
 		way-edges.url = "github:way-edges/way-edges";
 
     walker = {
@@ -13,7 +14,7 @@
     };
   };
 
-  outputs = { self, chataigne, nixpkgs, ... }@inputs: let
+  outputs = { self, doot, chataigne, nixpkgs, ... }@inputs: let
     stdenv.hostPlatform.system = "x86_64-linux";
     system = stdenv.hostPlatform.system;
     hardwareConfig = import /etc/nixos/hardware-configuration.nix;

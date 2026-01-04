@@ -1,4 +1,0 @@
-[submodule "nixos.doot"]
-	path = nixos.doot
-	url = https://github.com/voidarclabs/nixos.doot
-	branch = main

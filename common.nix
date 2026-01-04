@@ -142,6 +142,7 @@
 				git
 				fastfetch
 				lsd
+				inputs.doot.packages.${pkgs.system}.default
 				stow
 				fzf
 				ripgrep
