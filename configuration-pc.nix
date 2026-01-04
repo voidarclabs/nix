@@ -3,6 +3,7 @@
 {
 	networking.hostName = "HACKSTATION"; # Define your hostname.
 
+
 # Opengl and vulkan
 	hardware.graphics = {
 		enable = true;
@@ -12,13 +13,13 @@
 		];
 	};
 
-# 	services.displayManager.sddm = {
-# 		enable = true;
-# 		theme = "catppuccin-mocha-mauve";
-# 		package = pkgs.kdePackages.sddm;
-# 	};
+ 	services.displayManager.sddm = {
+ 		enable = true;
+		autoLogin.enable = true;
+		autoLogin.user = "user01";
+ 	};
 
-services.getty.autologinUser = "user01"
+services.getty.autologinUser = "user01";
 
 # Catppuccin sddm theme
 #		(pkgs.catppuccin-sddm.override {
@@ -37,6 +38,7 @@ services.getty.autologinUser = "user01"
 # Terminal
 
 # Apps
+	bottles
 				];
 	};
 
