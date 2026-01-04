@@ -29,6 +29,7 @@
     packages = with pkgs; [
       bottles
       ferdium
+      inputs.hyprfloat.packages.${pkgs.system}.default
       delfin
       jellyfin-tui
     ];

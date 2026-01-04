@@ -119,9 +119,10 @@
       # Ricing
       bibata-cursors
       catppuccin-gtk
-      # inputs.way-edges.packages.${pkgs.system}.way-edges
       waybar
       hyprlock
+      cava
+      cmatrix
       swaynotificationcenter
       inputs.chataigne.packages.${pkgs.system}.chataigne
       wlogout
@@ -193,6 +194,7 @@
   # User programs
   programs.steam.enable = true;
   programs.walker.enable = true;
+  programs.dconf.enable = true;
 
   # User Services
   services.gvfs.enable = true;

@@ -7,6 +7,10 @@
     chataigne.url = "./chataigne";
     doot.url = "github:voidarclabs/nixos.doot";
     way-edges.url = "github:way-edges/way-edges";
+    hyprfloat = {
+      url = "github:nevimmu/hyprfloat";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     walker = {
       url = "github:abenz1267/walker";
@@ -17,8 +21,6 @@
   outputs =
     {
       self,
-      doot,
-      chataigne,
       nixpkgs,
       ...
     }@inputs:
