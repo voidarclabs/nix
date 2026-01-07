@@ -15,6 +15,10 @@
     enable32Bit = true;
   };
 
+  # Wake on Lan
+  networking.interfaces.enp5s0.wakeOnLan.enable = true;
+  networking.firewall.enable = false;
+
   services.displayManager = {
     autoLogin.enable = true;
     autoLogin.user = "user01";
@@ -25,14 +29,18 @@
 
   # Local User
   users.users.user01 = {
-    extraGroups = [ ];
+    extraGroups = [ "docker" ];
     packages = with pkgs; [
       bottles
       ferdium
       inputs.hyprfloat.packages.${pkgs.system}.default
       delfin
+      docker
       jellyfin-tui
     ];
   };
 
+  virtualisation.docker = {
+    enable = true;
+  };
 }

@@ -59,6 +59,10 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   networking.networkmanager.enable = true;
+  networking.nameservers = [
+    "1.1.1.1"
+    "8.8.8.8"
+  ];
 
   # Enable bluetooth
   hardware.bluetooth.enable = true;
@@ -239,6 +243,7 @@
     vim
     unzip
     python310 # Its python like come on
+    usbutils
 
     # Graphics Drivers
     mesa
