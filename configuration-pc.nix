@@ -9,6 +9,19 @@
 {
   networking.hostName = "HACKSTATION";
 
+  # Enable nix-ld to run unpatched binaries
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    stdenv.cc.cc
+    zlib
+    libusb1
+  ];
+
+  # Add Samsung USB udev rules
+  services.udev.extraRules = ''
+    SUBSYSTEM=="usb", ATTR{idVendor}=="04e8", MODE="0666", GROUP="plugdev"
+  '';
+
   # Opengl and vulkan
   hardware.graphics = {
     enable = true;
@@ -29,11 +42,15 @@
 
   # Local User
   users.users.user01 = {
-    extraGroups = [ "docker" ];
+    extraGroups = [
+      "adbusers"
+      "docker"
+    ];
     packages = with pkgs; [
       bottles
       ferdium
-      inputs.hyprfloat.packages.${pkgs.system}.default
+      vesktop
+      wine64
       delfin
       docker
       jellyfin-tui

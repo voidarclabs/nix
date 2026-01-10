@@ -114,6 +114,8 @@
     description = "user01";
     extraGroups = [
       "input"
+      "root"
+      "plugdev"
       "bluetooth"
       "networkmanager"
       "docker"
@@ -139,7 +141,6 @@
       carapace
       kitty
       github-cli
-      # light
       bluetuith
       wget
       playerctl
