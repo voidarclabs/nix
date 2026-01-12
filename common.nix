@@ -59,6 +59,7 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   networking.networkmanager.enable = true;
+  networking.networkmanager.dns = "none";
   networking.nameservers = [
     "1.1.1.1"
     "8.8.8.8"
@@ -66,6 +67,7 @@
 
   # Enable bluetooth
   hardware.bluetooth.enable = true;
+  hardware.xpadneo.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/London";
@@ -200,6 +202,7 @@
   programs.steam.enable = true;
   programs.walker.enable = true;
   programs.dconf.enable = true;
+  programs.xfconf.enable = true;
 
   # User Services
   services.gvfs.enable = true;

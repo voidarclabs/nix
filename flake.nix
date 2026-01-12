@@ -50,6 +50,7 @@
         modules = [
           ./configuration-pc.nix
           ./common.nix
+          ./davinci.nix
           hardwareConfig
           {
             nixpkgs.config.allowUnfree = true;
