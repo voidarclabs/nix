@@ -50,6 +50,7 @@
       bottles
       ferdium
       vesktop
+      i3
       wine64
       delfin
       docker
