@@ -143,6 +143,8 @@
       carapace
       kitty
       github-cli
+      p7zip
+      p7zip-rar
       bluetuith
       wget
       playerctl

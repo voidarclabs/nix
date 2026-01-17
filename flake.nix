@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     elephant.url = "github:abenz1267/elephant";
-    chataigne.url = "./configs/chataigne";
+    chataigne.url = "./modules/chataigne";
     doot.url = "github:voidarclabs/nixos.doot";
     way-edges.url = "github:way-edges/way-edges";
     hyprfloat = {
@@ -51,6 +51,7 @@
           ./configs/configuration-pc.nix
           ./configs/common.nix
           ./modules/davinci/davinci.nix
+          ./modules/i3/i3.nix
           hardwareConfig
           {
             nixpkgs.config.allowUnfree = true;
