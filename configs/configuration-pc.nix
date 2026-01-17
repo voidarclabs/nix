@@ -49,14 +49,21 @@
     packages = with pkgs; [
       bottles
       ferdium
+      android-tools
       vesktop
-      i3
       wine64
       delfin
       docker
       jellyfin-tui
       unstable.bambu-studio
     ];
+  };
+
+  services.wivrn = {
+    enable = true;
+    package = pkgs.unstable.wivrn;
+    openFirewall = true;
+    defaultRuntime = true;
   };
 
   virtualisation.docker = {
