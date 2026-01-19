@@ -1,5 +1,5 @@
 {
-  description = "Impure NixOS flake";
+  description = "Master flake for Voidarc nix config";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -25,8 +25,7 @@
       ...
     }@inputs:
     let
-      stdenv.hostPlatform.system = "x86_64-linux";
-      system = stdenv.hostPlatform.system;
+      system = "x86_64-linux";
       hardwareConfig = import /etc/nixos/hardware-configuration.nix;
     in
     {

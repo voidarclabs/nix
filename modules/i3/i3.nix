@@ -6,6 +6,8 @@
   ...
 }:
 {
+  services.libinput.enable = true;
+
   services.displayManager.defaultSession = "hyprland";
   services.xserver = {
     enable = true;

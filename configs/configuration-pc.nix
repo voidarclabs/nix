@@ -55,7 +55,7 @@
       delfin
       docker
       jellyfin-tui
-      unstable.bambu-studio
+      orca-slicer
     ];
   };
 

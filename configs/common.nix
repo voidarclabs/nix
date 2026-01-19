@@ -132,7 +132,7 @@
       cava
       cmatrix
       swaynotificationcenter
-      inputs.chataigne.packages.${pkgs.system}.chataigne
+      inputs.chataigne.packages.${stdenv.hostPlatform.system}.chataigne
       wlogout
       wpaperd
       kando
@@ -151,7 +151,7 @@
       git
       fastfetch
       lsd
-      inputs.doot.packages.${pkgs.system}.default
+      inputs.doot.packages.${stdenv.hostPlatform.system}.default
       stow
       fzf
       ripgrep
@@ -275,5 +275,10 @@
 
   # The comment
   system.stateVersion = "25.05"; # Did you read the comment?
+
+  system.autoUpgrade = {
+    enable = true;
+    allowReboot = false;
+  };
 
 }

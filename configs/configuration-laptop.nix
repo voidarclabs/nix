@@ -39,8 +39,8 @@
     extraGroups = [ ];
     packages = with pkgs; [
       # Ricing
-      inputs.way-edges.packages.${pkgs.system}.way-edges
-      inputs.chataigne.packages.${pkgs.system}.chataigne
+      inputs.way-edges.packages.${stdenv.hostPlatform.system}.way-edges
+      inputs.chataigne.packages.${stdenv.hostPlatform.system}.chataigne
 
       # Terminal
       light
