@@ -213,6 +213,7 @@
   services.upower.enable = true;
   services.openssh.enable = true;
   services.elephant.enable = true;
+  services.avahi.enable = true;
 
   # Fonts
   fonts.packages = with pkgs; [
