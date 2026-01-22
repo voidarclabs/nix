@@ -89,7 +89,10 @@
   # Windowing Systems
   services.xserver.enable = true;
 
-  programs.hyprland.enable = true;
+  programs.hyprland = {
+    enable = true;
+    package = pkgs.unstable.hyprland;
+  };
   security.polkit.enable = true;
 
   # Keymap
