@@ -32,6 +32,8 @@
   networking.interfaces.enp5s0.wakeOnLan.enable = true;
   networking.firewall.enable = false;
 
+  systemd.services.NetworkManager-wait-online.enable = false;
+
   services.displayManager = {
     autoLogin.enable = true;
     autoLogin.user = "user01";
@@ -68,5 +70,6 @@
 
   virtualisation.docker = {
     enable = true;
+    enableOnBoot = false;
   };
 }

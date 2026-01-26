@@ -164,10 +164,10 @@
       tailscale
 
       # Thunar stuff
-      xfce.thunar
-      xfce.thunar-volman
-      xfce.thunar-vcs-plugin
-      xfce.thunar-archive-plugin
+      thunar
+      thunar-volman
+      thunar-vcs-plugin
+      thunar-archive-plugin
 
       # Apps
       pavucontrol
@@ -279,10 +279,5 @@
 
   # The comment
   system.stateVersion = "25.05"; # Did you read the comment?
-
-  system.autoUpgrade = {
-    enable = true;
-    allowReboot = false;
-  };
 
 }
