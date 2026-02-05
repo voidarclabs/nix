@@ -1,26 +1,22 @@
+# Tested on Davinci 20.2.2. It works for loading videos and exporting in H264/5 & AV1
+# Even if following this guide https://www.reddit.com/r/LinuxCrackSupport/comments/1nfqhld/davinci_resolve_studio_202_fix_linux_crack_guide/
+# nixpkgs rev used for this tests: 4652ba995a945108fb891191c1e910b9a6ed9064
+
 { lib, pkgs, ... }:
 let
-  # 1. Pin Nixpkgs to your specific commit
-  pinnedPkgs =
-    import
-      (builtins.fetchTarball {
-        url = "https://github.com/NixOS/nixpkgs/archive/d457818da697aa7711ff3599be23ab8850573a46.tar.gz";
-        # Replace this with the hash from the nix-prefetch-url command above
-        sha256 = "11lf0nq7d4c5mgxiy0n9h8qdzvww6k0vmd5h1a75in6dnkry5l3z";
-      })
-      {
-        inherit (pkgs) system;
-        config.allowUnfree = true;
-      };
-  ffmpeg-encoder-plugin = pinnedPkgs.stdenv.mkDerivation (finalAttrs: {
+  pkgs = import (builtins.fetchTarball {
+    url = "https://github.com/NixOS/nixpkgs/archive/4652ba995a945108fb891191c1e910b9a6ed9064.tar.gz";
+    sha256 = "sha256:1pmmbasd84z3yi06919jnl9gvpm37cfr30rba3mc8mgig8ansfhf"; # You can find this using nix-prefetch-url
+  }) { config.allowUnfree = true; };
+  ffmpeg-encoder-plugin = pkgs.stdenv.mkDerivation (finalAttrs: {
     pname = "ffmpeg-encoder-plugin";
-    version = "1.1.0";
+    version = "1.2.1";
 
     src = pkgs.fetchFromGitHub {
       owner = "EdvinNilsson";
       repo = "ffmpeg_encoder_plugin";
       tag = "v${finalAttrs.version}";
-      hash = "sha256-orghLIzz9rUnUwka9C71Z2nj+qxHuggrKNlYjLKswQw=";
+      hash = "sha256-F4Q8YCXD5UldTwLbWK4nHacNPQ/B+4yLL96sq7xZurM=";
     };
 
     nativeBuildInputs = with pkgs; [
@@ -32,15 +28,17 @@ let
 
     installPhase = ''
       runHook preInstall
+
       mkdir -p $out
       cp ffmpeg_encoder_plugin.dvcp $out/
+
       runHook postInstall
     '';
   });
 
   davinci-resolve-studio-cracked =
     let
-      davinci-patched = pinnedPkgs.davinci-resolve-studio.davinci.overrideAttrs (old: {
+      davinci-patched = pkgs.davinci-resolve-studio.davinci.overrideAttrs (old: {
         # script based on https://www.reddit.com/r/LinuxCrackSupport/comments/1nfqhld/davinci_resolve_studio_202_fix_linux_crack_guide/
         #
         # Additionally, it will install ffmpeg_encoder_plugin to enable H264/5 & AV1 exports:
@@ -55,6 +53,7 @@ let
           ${lib.getExe pkgs.perl} -pi -e 's/\x41\xb6\x01\x84\xc0\x0f\x84\xb0\x00\x00\x00\x48\x85\xdb\x74\x08\x45\x31\xf6\xe9\xa3\x00\x00\x00/\x41\xb6\x00\x84\xc0\x0f\x84\xb0\x00\x00\x00\x48\x85\xdb\x74\x08\x45\x31\xf6\xe9\xa3\x00\x00\x00/' $out/bin/resolve
           touch $out/.license/blackmagic.lic
           echo -e "LICENSE blackmagic davinciresolvestudio 999999 permanent uncounted\n  hostid=ANY issuer=CGP customer=CGP issued=28-dec-2023\n  akey=0000-0000-0000-0000 _ck=00 sig=\"00\"" > $out/.license/blackmagic.lic
+
           mkdir -p $out/IOPlugins/ffmpeg_encoder_plugin.dvcp.bundle/Contents/Linux-x86-64/
           cp ${ffmpeg-encoder-plugin}/ffmpeg_encoder_plugin.dvcp $out/IOPlugins/ffmpeg_encoder_plugin.dvcp.bundle/Contents/Linux-x86-64/
         '';
@@ -64,12 +63,12 @@ let
     # the following was copied from davinci's derivation from nixpkgs.
     # if davinci updates, this should be updated too
     # but remember to replace "davinci" with "davinci-patched"
-    pinnedPkgs.buildFHSEnv {
+    pkgs.buildFHSEnv {
       inherit (davinci-patched) pname version;
 
       targetPkgs =
         pkgs:
-        with pinnedPkgs;
+        with pkgs;
         [
           alsa-lib
           aprutil
@@ -118,6 +117,10 @@ let
           xorg.xcbutilwm
           xorg.xkeyboardconfig
           zlib
+          ocl-icd
+          rocmPackages.clr.icd
+          libGL
+          libGLU
         ]
         ++ [ davinci-patched ];
 
@@ -130,10 +133,16 @@ let
       ];
 
       runScript = "${lib.getExe pkgs.bash} ${pkgs.writeText "davinci-wrapper" ''
-        export QT_XKB_CONFIG_ROOT="${pkgs.xkeyboard_config}/share/X11/xkb"
-        export QT_PLUGIN_PATH="${davinci-patched}/libs/plugins:$QT_PLUGIN_PATH"
-        export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib:/usr/lib32:${davinci-patched}/libs
-        ${davinci-patched}/bin/resolve
+          export QT_XKB_CONFIG_ROOT="${pkgs.xkeyboard_config}/share/X11/xkb"
+          export QT_PLUGIN_PATH="${davinci-patched}/libs/plugins:$QT_PLUGIN_PATH"
+          export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib:/usr/lib32:${davinci-patched}/libs
+        	# Force Resolve to use X11 (via XWayland) to avoid Aquamarine/Hyprland conflicts
+          export QT_QPA_PLATFORM=xcb
+          export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${davinci-patched}/libs
+          
+          # Prevent Resolve from trying to talk to the Wayland socket directly
+          unset WAYLAND_DISPLAY
+          ${davinci-patched}/bin/resolve
       ''}";
 
       extraInstallCommands = ''
@@ -157,10 +166,13 @@ let
               drv=pkgs/by-name/da/davinci-resolve/package.nix
               currentVersion=${lib.escapeShellArg davinci-patched.version}
               downloadsJSON="$(curl --fail --silent https://www.blackmagicdesign.com/api/support/us/downloads.json)"
+
               latestLinuxVersion="$(echo "$downloadsJSON" | jq '[.downloads[] | select(.urls.Linux) | .urls.Linux[] | select(.downloadTitle | test("DaVinci Resolve")) | .downloadTitle]' | grep -oP 'DaVinci Resolve \K\d+\.\d+(\.\d+)?' | sort | tail -n 1)"
               update-source-version davinci-resolve "$latestLinuxVersion" --source-key=davinci.src
+
               # Since the standard and studio both use the same version we need to reset it before updating studio
               sed -i -e "s/""$latestLinuxVersion""/""$currentVersion""/" "$drv"
+
               latestStudioLinuxVersion="$(echo "$downloadsJSON" | jq '[.downloads[] | select(.urls.Linux) | .urls.Linux[] | select(.downloadTitle | test("DaVinci Resolve")) | .downloadTitle]' | grep -oP 'DaVinci Resolve Studio \K\d+\.\d+(\.\d+)?' | sort | tail -n 1)"
               update-source-version davinci-resolve-studio "$latestStudioLinuxVersion" --source-key=davinci.src
             '';
@@ -173,22 +185,7 @@ in
   environment.systemPackages = [ davinci-resolve-studio-cracked ];
 
   # following configuration was taken from
-  # https://wiki.nixos.org/wiki/DaVinci_Resolve#AMD
-  #
-  # Tested and working with AMD cards.
-  # I don't know any configurations for Nvidia cards!
-  environment.variables = {
-    RUSTICL_ENABLE = "radeonsi";
-  };
-  hardware = {
-    # this option sets hardware.graphics.enable to true
-    # and installs rocmPackages.clr/.icd
-    amdgpu.opencl.enable = true;
-    graphics.extraPackages = with pkgs; [
-      # Enables Rusticl (OpenCL) support
-      # Without this, videos won't load in davinci
-      mesa.opencl
-    ];
-  };
+  # https://wiki.nixos.org/wiki/DaVinci_Resolve
 
+  # Zynix
 }
