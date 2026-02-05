@@ -22,11 +22,22 @@
     SUBSYSTEM=="usb", ATTR{idVendor}=="04e8", MODE="0666", GROUP="plugdev"
   '';
 
+  hardware.amdgpu.initrd.enable = true;
+
   # Opengl and vulkan
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
+    extraPackages = with pkgs; [
+      # This is the most critical package for AMD OpenCL
+      rocmPackages.clr.icd
+    ];
   };
+
+  boot.kernelParams = [
+    "amdgpu.noretry=0"
+    "amdgpu.gpu_recovery=1"
+  ];
 
   # Wake on Lan
   networking.interfaces.enp5s0.wakeOnLan.enable = true;

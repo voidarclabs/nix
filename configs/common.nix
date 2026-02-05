@@ -163,10 +163,10 @@
       tailscale
 
       # Thunar stuff
-      thunar
-      thunar-volman
-      thunar-vcs-plugin
-      thunar-archive-plugin
+      xfce.thunar
+      xfce.thunar-volman
+      xfce.thunar-vcs-plugin
+      xfce.thunar-archive-plugin
 
       # Apps
       pavucontrol

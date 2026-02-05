@@ -2,7 +2,7 @@
   description = "Master flake for Voidarc nix config";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     elephant.url = "github:abenz1267/elephant";
     chataigne.url = "./modules/chataigne";
     doot.url = "github:voidarclabs/nixos.doot";
