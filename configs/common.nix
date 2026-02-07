@@ -171,6 +171,7 @@
       # Apps
       pavucontrol
       firefox
+      htop
       input-remapper
       tor-browser
       gotify-desktop
