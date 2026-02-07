@@ -19,8 +19,18 @@ let
           allowUnfree = true;
         };
       };
+  pkgs-pinned =
+    import
+      (builtins.fetchTarball {
+        url = "https://github.com/NixOS/nixpkgs/archive/497ee3c70707fd71b45c37d48ae1d45e79751047.tar.gz";
+      })
+      {
+        config = {
+          allowUnfree = true;
+        };
+      };
   original =
-    if studio-variant then pkgs-unstable.davinci-resolve-studio else pkgs-unstable.davinci-resolve;
+    if studio-variant then pkgs-pinned.davinci-resolve-studio else pkgs-pinned.davinci-resolve;
   davinci-unwrapped = original.passthru.davinci;
 
   ffmpeg-encoder-plugin = pkgs-unstable.stdenv.mkDerivation (finalAttrs: {
