@@ -51,7 +51,7 @@
         modules = [
           ./configs/configuration-pc.nix
           ./configs/common.nix
-          ./modules/davinci/default.nix
+          ./modules/davinci/davinci.nix
           ./modules/i3/i3.nix
           hardwareConfig
           {
