@@ -2,12 +2,22 @@
 # Even if following this guide https://www.reddit.com/r/LinuxCrackSupport/comments/1nfqhld/davinci_resolve_studio_202_fix_linux_crack_guide/
 # nixpkgs rev used for this tests: 4652ba995a945108fb891191c1e910b9a6ed9064
 
-{ lib, pkgs, ... }:
+{ lib, inputs, ... }:
 let
+  mesa-good-pkg = inputs.mesa-davinci.legacyPackages.x86_64-linux.mesa;
   pkgs = import (builtins.fetchTarball {
-    url = "https://github.com/NixOS/nixpkgs/archive/4652ba995a945108fb891191c1e910b9a6ed9064.tar.gz";
-    sha256 = "sha256:1pmmbasd84z3yi06919jnl9gvpm37cfr30rba3mc8mgig8ansfhf"; # You can find this using nix-prefetch-url
+    url = "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
   }) { config.allowUnfree = true; };
+  pkgs-pinned =
+    import
+      (builtins.fetchTarball {
+        url = "https://github.com/NixOS/nixpkgs/archive/497ee3c70707fd71b45c37d48ae1d45e79751047.tar.gz";
+      })
+      {
+        config = {
+          allowUnfree = true;
+        };
+      };
   ffmpeg-encoder-plugin = pkgs.stdenv.mkDerivation (finalAttrs: {
     pname = "ffmpeg-encoder-plugin";
     version = "1.2.1";
@@ -38,7 +48,7 @@ let
 
   davinci-resolve-studio-cracked =
     let
-      davinci-patched = pkgs.davinci-resolve-studio.davinci.overrideAttrs (old: {
+      davinci-patched = pkgs-pinned.davinci-resolve-studio.davinci.overrideAttrs (old: {
         # script based on https://www.reddit.com/r/LinuxCrackSupport/comments/1nfqhld/davinci_resolve_studio_202_fix_linux_crack_guide/
         #
         # Additionally, it will install ffmpeg_encoder_plugin to enable H264/5 & AV1 exports:
@@ -122,7 +132,10 @@ let
           libGL
           libGLU
         ]
-        ++ [ davinci-patched ];
+        ++ [
+          mesa-good-pkg
+          davinci-patched
+        ];
 
       extraPreBwrapCmds = ''
         mkdir -p ~/.local/share/DaVinciResolve/Extras || exit 1
@@ -183,9 +196,4 @@ let
 in
 {
   environment.systemPackages = [ davinci-resolve-studio-cracked ];
-
-  # following configuration was taken from
-  # https://wiki.nixos.org/wiki/DaVinci_Resolve
-
-  # Zynix
 }

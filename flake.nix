@@ -16,6 +16,8 @@
       url = "github:abenz1267/walker";
       inputs.elephant.follows = "elephant";
     };
+
+    mesa-davinci.url = "github:nixos/nixpkgs?ref=599ddd2b79331c1e6153e1659bdaab65d62c4c82";
   };
 
   outputs =

@@ -131,6 +131,22 @@
         "type": "github"
       }
     },
+    "mesa-davinci": {
+      "locked": {
+        "lastModified": 1754501210,
+        "narHash": "sha256-ahTHrGs72TLVcNUR2VHckEx+t6frke0e/Ptk6AaEINk=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "599ddd2b79331c1e6153e1659bdaab65d62c4c82",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "599ddd2b79331c1e6153e1659bdaab65d62c4c82",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1770197578,
@@ -250,6 +266,7 @@
         "doot": "doot",
         "elephant": "elephant",
         "hyprfloat": "hyprfloat",
+        "mesa-davinci": "mesa-davinci",
         "nixpkgs": "nixpkgs_4",
         "walker": "walker",
         "way-edges": "way-edges"

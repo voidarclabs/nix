@@ -28,15 +28,12 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
-    extraPackages = with pkgs; [
-      # This is the most critical package for AMD OpenCL
-      rocmPackages.clr.icd
-    ];
   };
 
+  hardware.amdgpu.opencl.enable = true;
+
   boot.kernelParams = [
-    "amdgpu.noretry=0"
-    "amdgpu.gpu_recovery=1"
+    "amdgpu.ppfeaturemask=0xffffffff"
   ];
 
   # Wake on Lan
